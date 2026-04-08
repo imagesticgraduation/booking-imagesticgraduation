@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Booking Imagestic Graduation</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        body { font-family: 'Poppins', sans-serif; background: #f4f7f6; display: flex; justify-content: center; padding: 20px; color: #333; }
+        .container { background: #fff; width: 100%; max-width: 550px; padding: 35px; border-radius: 12px; box-shadow: 0 5px 25px rgba(0,0,0,0.08); }
+        h2 { text-align: center; color: #1a1a1a; margin-bottom: 30px; font-weight: 700; letter-spacing: -0.5px; }
+        
+        .form-group { margin-bottom: 18px; }
+        .form-row { display: flex; gap: 15px; }
+        .form-row .form-group { flex: 1; margin-bottom: 18px; }
+
+        label { display: block; font-weight: 600; margin-bottom: 6px; font-size: 13px; color: #4a5568; }
+        label.req::after { content: " *"; color: #e53e3e; }
+        
+        input[type="text"], input[type="number"], input[type="date"], input[type="time"], select, textarea {
+            width: 100%; padding: 12px 14px; border: 1px solid #e2e8f0; border-radius: 8px; 
+            box-sizing: border-box; font-family: 'Poppins'; font-size: 14px; background: #f8fafc; transition: 0.3s;
+        }
+        input:focus, select:focus, textarea:focus { outline: none; border-color: #1a1a1a; background: #fff; }
+        textarea { resize: vertical; min-height: 80px; }
+
+        /* Styling khusus untuk input Waktu (Jam Mulai - Selesai) */
+        .waktu-container { display: flex; gap: 10px; align-items: center; }
+        .waktu-container span { font-weight: 600; color: #718096; }
+
+        /* T&C Checkbox Styling */
+        .checkbox-container {
+            display: flex; align-items: flex-start; gap: 10px; background: #f1f5f9; padding: 15px; border-radius: 8px; margin-top: 25px; margin-bottom: 20px;
+        }
+        .checkbox-container input { width: 18px; height: 18px; margin-top: 2px; cursor: pointer; }
+        .checkbox-container label { font-size: 12px; color: #475569; font-weight: 500; margin-bottom: 0; cursor: pointer; line-height: 1.5; }
+
+        button { width: 100%; padding: 15px; background: #1a1a1a; color: #fff; border: none; border-radius: 8px; font-size: 15px; font-weight: 700; cursor: pointer; transition: 0.3s; }
+        button:hover { background: #333; transform: translateY(-2px); }
+        button:disabled { background: #cbd5e1; cursor: not-allowed; transform: none; }
+
+        @media (max-width: 500px) { .form-row { flex-direction: column; gap: 0; } }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>Imagestic.grad Booking</h2>
+        <form id="imagesticForm">
+            
+            <div class="form-group">
+                <label class="req">Nama Lengkap</label>
+                <input type="text" name="Nama Lengkap" required placeholder="Sesuai KTP / Panggilan">
+            </div>
+
+            <div class="form-row">
+                <div class="form-group">
+                    <label class="req">Tanggal Foto</label>
+                    <input type="date" id="tglInput" name="Tanggal Foto" required>
+                </div>
+                <div class="form-group">
+                    <label class="req">Waktu (Jam Mulai - Selesai)</label>
+                    <div class="waktu-container">
+                        <input type="time" id="jamMulai" required>
+                        <span>-</span>
+                        <input type="time" id="jamSelesai" required>
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label class="req">Pilih Paket</label>
+                <select name="Paket" required>
+                    <option value="" disabled selected>-- Pilih Paket --</option>
+                    <optgroup label="Luxury Series">
+                        <option value="Luxury One">Luxury One</option>
+                        <option value="Luxury Two">Luxury Two</option>
+                    </optgroup>
+                    <optgroup label="Personal Series">
+                        <option value="Personal Combo">Personal Combo</option>
+                        <option value="Personal Prime">Personal Prime</option>
+                        <option value="Personal Clean">Personal Clean</option>
+                        <option value="Personal Classic">Personal Classic</option>
+                    </optgroup>
+                    <optgroup label="Cinema Series">
+                        <option value="Cinema Reels">Cinema Reels</option>
+                        <option value="Cinema Gold">Cinema Gold</option>
+                        <option value="Cinema Platinum">Cinema Platinum</option>
+                    </optgroup>
+                    <optgroup label="Mate Series">
+                        <option value="Mate-Intimate">Mate-Intimate</option>
+                        <option value="Mate-Bestie">Mate-Bestie</option>
+                    </optgroup>
+                    <optgroup label="Group Series">
+                        <option value="Group 1">Group 1</option>
+                        <option value="Group 2">Group 2</option>
+                    </optgroup>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label class="req">Lokasi Foto</label>
+                <input type="text" name="Lokasi" required placeholder="Gedung / Spot Foto">
+            </div>
+
+            <div class="form-row">
+                <div class="form-group">
+                    <label class="req">Kampus</label>
+                    <input type="text" name="Kampus" required placeholder="Contoh: UNDIP">
+                </div>
+                <div class="form-group">
+                    <label class="req">Fakultas</label>
+                    <input type="text" name="Fakultas" required placeholder="Contoh: FISIP">
+                </div>
+            </div>
+
+            <div class="form-row">
+                <div class="form-group">
+                    <label class="req">No WhatsApp</label>
+                    <input type="number" name="No HP" required placeholder="08xxxx">
+                </div>
+                <div class="form-group">
+                    <label class="req">Instagram</label>
+                    <input type="text" name="Instagram" required placeholder="@username">
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label class="req">Nominal DP (Rp)</label>
+                <input type="number" name="Nominal DP" required placeholder="Contoh: 100000">
+            </div>
+
+            <div class="form-row">
+                <div class="form-group">
+                    <label>Vendor MUA (Opsional)</label>
+                    <input type="text" name="Vendor MUA" placeholder="Nama MUA jika ada">
+                </div>
+                <div class="form-group">
+                    <label>Vendor Attire (Opsional)</label>
+                    <input type="text" name="Vendor Attire" placeholder="Sewa kebaya/jas jika ada">
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label>Catatan Tambahan (Opsional)</label>
+                <textarea name="Catatan Tambahan" placeholder="Tuliskan jika ada request khusus untuk fotografer..."></textarea>
+            </div>
+
+            <div class="checkbox-container">
+                <input type="checkbox" id="persetujuan" name="Persetujuan" value="Setuju" required>
+                <label for="persetujuan">Saya sudah membaca Term and Condition yang tertera pada Pricelist Imagestic Graduation, dan saya menyetujuinya.</label>
+            </div>
+
+            <button type="submit" id="btnSubmit">Kirim & Lanjut WA</button>
+        </form>
+    </div>
+
+    <script>
+        // GANTI DENGAN URL WEB APP KAMU SETELAH DEPLOY
+        const scriptURL = 'https://script.google.com/macros/s/AKfycbx5ojhPGPZGM929p9Hq95F1gc46h0EDp2yuwUoy9fYZKo7FpXJ-FnGcgN39cUw7NsRW/exec';
+        const nomorWA = '6288215349871';
+        const form = document.getElementById('imagesticForm');
+
+        form.addEventListener('submit', e => {
+            e.preventDefault();
+            const btn = document.getElementById('btnSubmit');
+            btn.innerHTML = 'Menyimpan Data...';
+            btn.disabled = true;
+
+            const formData = new FormData(form);
+            
+            // Format Tanggal
+            const tgl = new Date(document.getElementById('tglInput').value);
+            const months = ["Januari", "Februari", "Maret", "April", "Mei", "Juni", "Juli", "Agustus", "September", "Oktober", "November", "Desember"];
+            formData.set('Tanggal Foto', `${tgl.getDate()} ${months[tgl.getMonth()]} ${tgl.getFullYear()}`);
+            
+            // BAGIAN YANG DIUBAH: Format Jam Mulai - Jam Selesai
+            const jamMulai = document.getElementById('jamMulai').value.replace(':', '.');
+            const jamSelesai = document.getElementById('jamSelesai').value.replace(':', '.');
+            formData.set('Waktu', `${jamMulai} - ${jamSelesai}`);
+
+            fetch(scriptURL, { method: 'POST', body: formData })
+            .then(() => {
+                const pesan = `Halo Admin Imagestic! Saya baru saja mengisi form booking via Website.
+
+Nama : ${formData.get('Nama Lengkap')}
+Paket : ${formData.get('Paket')}
+Tanggal : ${formData.get('Tanggal Foto')}
+Waktu : ${formData.get('Waktu')}
+Kampus : ${formData.get('Kampus')}
+DP Transfer : Rp ${formData.get('Nominal DP')}
+
+Berikut saya lampirkan bukti transfer DP-nya...`;
+
+                window.location.href = `https://wa.me/${nomorWA}?text=${encodeURIComponent(pesan)}`;
+            })
+            .catch(error => {
+                alert('Gagal mengirim data! Silakan coba lagi.');
+                btn.disabled = false;
+                btn.innerHTML = 'Kirim & Lanjut WA';
+            });
+        });
+    </script>
+</body>
+</html>
