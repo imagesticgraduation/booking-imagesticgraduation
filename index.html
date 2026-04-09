@@ -24,14 +24,10 @@
         input:focus, select:focus, textarea:focus { outline: none; border-color: #1a1a1a; background: #fff; }
         textarea { resize: vertical; min-height: 80px; }
 
-        /* Styling khusus untuk input Waktu (Jam Mulai - Selesai) */
         .waktu-container { display: flex; gap: 10px; align-items: center; }
         .waktu-container span { font-weight: 600; color: #718096; }
 
-        /* T&C Checkbox Styling */
-        .checkbox-container {
-            display: flex; align-items: flex-start; gap: 10px; background: #f1f5f9; padding: 15px; border-radius: 8px; margin-top: 25px; margin-bottom: 20px;
-        }
+        .checkbox-container { display: flex; align-items: flex-start; gap: 10px; background: #f1f5f9; padding: 15px; border-radius: 8px; margin-top: 25px; margin-bottom: 20px; }
         .checkbox-container input { width: 18px; height: 18px; margin-top: 2px; cursor: pointer; }
         .checkbox-container label { font-size: 12px; color: #475569; font-weight: 500; margin-bottom: 0; cursor: pointer; line-height: 1.5; }
 
@@ -116,7 +112,7 @@
             <div class="form-row">
                 <div class="form-group">
                     <label class="req">No WhatsApp</label>
-                    <input type="number" name="No HP" required placeholder="08xxxx">
+                    <input type="number" name="No WhatsApp" required placeholder="08xxxx">
                 </div>
                 <div class="form-group">
                     <label class="req">Instagram</label>
@@ -155,9 +151,10 @@
     </div>
 
     <script>
-        // GANTI DENGAN URL WEB APP KAMU SETELAH DEPLOY
-        const scriptURL = 'https://script.google.com/macros/s/AKfycbwW_0p75mshRxQsW0aYllpfYnsqbcHsH_wMEUkb_RKIUJcn7ruXZt0qWj_ckTtybU55/exec';
+        // GANTI LINK DI BAWAH INI DENGAN URL DEPLOYMENT KAMU YANG BARU
+        const scriptURL = 'MASUKKAN_URL_WEB_APP_DI_SINI';
         const nomorWA = '6288215349871';
+        
         const form = document.getElementById('imagesticForm');
 
         form.addEventListener('submit', e => {
@@ -173,32 +170,29 @@
             const months = ["Januari", "Februari", "Maret", "April", "Mei", "Juni", "Juli", "Agustus", "September", "Oktober", "November", "Desember"];
             formData.set('Tanggal Foto', `${tgl.getDate()} ${months[tgl.getMonth()]} ${tgl.getFullYear()}`);
             
-            // BAGIAN YANG DIUBAH: Format Jam Mulai - Jam Selesai
+            // Format Jam
             const jamMulai = document.getElementById('jamMulai').value.replace(':', '.');
             const jamSelesai = document.getElementById('jamSelesai').value.replace(':', '.');
             formData.set('Waktu', `${jamMulai} - ${jamSelesai}`);
 
+            // Proses Kirim Data
             fetch(scriptURL, { method: 'POST', body: formData })
-            .then(() => {
-                const pesan = `Halo Admin Imagestic! Saya baru saja mengisi form booking via Website.
-
-Nama : ${formData.get('Nama Lengkap')}
-Paket : ${formData.get('Paket')}
-Tanggal : ${formData.get('Tanggal Foto')}
-Waktu : ${formData.get('Waktu')}
-Kampus : ${formData.get('Kampus')}
-DP Transfer : Rp ${formData.get('Nominal DP')}
-
-Berikut saya lampirkan bukti transfer DP-nya...`;
-
-                window.location.href = `https://wa.me/${nomorWA}?text=${encodeURIComponent(pesan)}`;
+            .then(response => response.json())
+            .then(data => {
+                if (data.result === 'success') {
+                    const pesan = `Halo Admin Imagestic! Saya baru saja mengisi form booking via Website.\n\nNama : ${formData.get('Nama Lengkap')}\nPaket : ${formData.get('Paket')}\nTanggal : ${formData.get('Tanggal Foto')}\nWaktu : ${formData.get('Waktu')}\nKampus : ${formData.get('Kampus')}\nDP Transfer : Rp ${formData.get('Nominal DP')}\n\nBerikut saya lampirkan bukti transfer DP-nya...`;
+                    window.location.href = `https://wa.me/${nomorWA}?text=${encodeURIComponent(pesan)}`;
+                } else {
+                    throw new Error(data.error);
+                }
             })
             .catch(error => {
-                alert('Gagal mengirim data! Silakan coba lagi.');
+                console.error('Error!', error.message);
+                alert('Gagal mengirim! Pastikan judul kolom di Excel tidak ada spasi yang salah.');
                 btn.disabled = false;
                 btn.innerHTML = 'Kirim & Lanjut WA';
             });
         });
     </script>
 </body>
-</html> 
+</html>
