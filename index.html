@@ -180,7 +180,22 @@
             .then(response => response.json())
             .then(data => {
                 if (data.result === 'success') {
-                    const pesan = `Halo Admin Imagestic! Saya baru saja mengisi form booking via Website.\n\nNama : ${formData.get('Nama Lengkap')}\nPaket : ${formData.get('Paket')}\nTanggal : ${formData.get('Tanggal Foto')}\nWaktu : ${formData.get('Waktu')}\nKampus : ${formData.get('Kampus')}\nDP Transfer : Rp ${formData.get('Nominal DP')}\n\nBerikut saya lampirkan bukti transfer DP-nya...`;
+                    const pesan = `Halo Admin Imagestic! Saya baru saja mengisi form booking via Website.
+
+Nama Lengkap : ${formData.get('Nama Lengkap')}
+Tanggal Foto : ${formData.get('Tanggal Foto')}
+Waktu : ${formData.get('Waktu')}
+Paket : ${formData.get('Paket')}
+Lokasi : ${formData.get('Lokasi')}
+Kampus : ${formData.get('Kampus')}
+Fakultas : ${formData.get('Fakultas')}
+No WhatsApp : ${formData.get('No WhatsApp')}
+Instagram : ${formData.get('Instagram')}
+Nominal DP : Rp ${formData.get('Nominal DP')}
+Vendor MUA : ${formData.get('Vendor MUA') || '-'}
+Vendor Attire : ${formData.get('Vendor Attire') || '-'}
+Catatan Tambahan : ${formData.get('Catatan Tambahan') || '-'}
+Persetujuan : ${formData.get('Persetujuan')}`;
                     window.location.href = `https://wa.me/${nomorWA}?text=${encodeURIComponent(pesan)}`;
                 } else {
                     throw new Error(data.error);
